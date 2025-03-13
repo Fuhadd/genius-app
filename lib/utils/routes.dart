@@ -24,6 +24,9 @@ import 'package:genius_app/screens/plans/health_plans/add_dependant_form_screen.
 import 'package:genius_app/screens/plans/health_plans/add_dependant_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/auto_renewal_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/buy_dependant_slot_screen.dart';
+import 'package:genius_app/screens/plans/health_plans/buy_plan_new_user/buy_plan_overview_screen.dart';
+import 'package:genius_app/screens/plans/health_plans/buy_plan_new_user/select_coverage_type_screen.dart';
+import 'package:genius_app/screens/plans/health_plans/buy_plan_new_user/select_plan_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/change_plans_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/compare_plans_table_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/deactivate_plan_screen.dart';
@@ -479,6 +482,28 @@ final GoRouter router = GoRouter(
       path: RouteConstants.hospitalDetailsScreen,
       builder: (context, state) {
         return HospitalDetailsScreen();
+      },
+    ),
+    
+    GoRoute(
+      name: RouteConstants.selectPlanScreen,
+      path: RouteConstants.selectPlanScreen,
+      builder: (context, state) {
+        return SelectPlanScreen();
+      },
+    ),
+     GoRoute(
+      name: RouteConstants.buyPlanOverviewScreen,
+      path: RouteConstants.buyPlanOverviewScreen,
+      builder: (context, state) {
+        return BuyPlanOverviewScreen();
+      },
+    ),
+     GoRoute(
+      name: RouteConstants.selectCoverageTypeScreen,
+      path: RouteConstants.selectCoverageTypeScreen,
+      builder: (context, state) {
+        return SelectCoverageTypeScreen();
       },
     ),
   ],

@@ -62,12 +62,14 @@ Widget semiBoldText(
   double? height = 1.40,
   double? letterSpacing = 0,
   TextDecoration? decoration,
+  bool softWrap = true,
 }) =>
     Text(
       title,
       key: key,
       textAlign: textAlign,
       maxLines: maxLines,
+      softWrap: softWrap,
       style: CustomTextStyles.semiBold(
         height: height,
         fontSize: fontSize,

@@ -3,11 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
+import 'package:genius_app/constants/route_constants.dart';
+import 'package:genius_app/models/screen_prop_models/health_plans_model.dart';
 import 'package:genius_app/screens/homepage/active_users_home_page.dart';
 import 'package:genius_app/screens/homepage/new_users_home_page.dart';
 import 'package:genius_app/screens/plans/my_plans_screen.dart';
 import 'package:genius_app/utils/spacers.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class BottomNavigationScreen extends StatefulHookConsumerWidget {
@@ -63,7 +66,14 @@ class _BottomNavigationScreenState extends ConsumerState<BottomNavigationScreen>
             child: FloatingActionButton(
               backgroundColor: CustomColors.green400Color,
               elevation: 0,
-              onPressed: () => debugPrint("Add Button pressed"),
+              onPressed:  () {
+        context.pushNamed(
+          RouteConstants.selectPlanScreen,
+          extra: HealthPlansModel(
+            isExpired: false,
+          ),
+        );
+      },
               shape: RoundedRectangleBorder(
                 side: const BorderSide(
                   width: 2,

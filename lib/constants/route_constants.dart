@@ -54,4 +54,9 @@ class RouteConstants {
   static const String comparePlansTableScreen = '/comparePlansTableScreen';
   static const String visitHospitalScreen = '/visitHospitalScreen';
   static const String hospitalDetailsScreen = '/hospitalDetailsScreen';
+
+  static const String selectPlanScreen = '/selectPlanScreen';
+  static const String buyPlanOverviewScreen = '/buyPlanOverviewScreen';
+
+  static const String selectCoverageTypeScreen = '/selectCoverageTypeScreen';
 }

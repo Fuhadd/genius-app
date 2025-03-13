@@ -83,6 +83,7 @@ class ConstantString {
   static const walletIcon = "assets/icons/wallet_icon.svg";
   static const autoIcon = "assets/icons/auto_icon.svg";
   static const chevronRight = "assets/icons/chevron_right.svg";
+    static const chevronUp= "assets/icons/chevron_up.svg";
   static const wobbleCircle = "assets/icons/wobble_circle.svg";
 
   static const comprehensiveAuto = "assets/icons/comprehensive_auto.svg";
@@ -206,6 +207,10 @@ class ConstantString {
   static const starFilledIcon = "assets/icons/star_filled_icon.svg";
   static const starIcon = "assets/icons/star_icon.svg";
   static const pharmacyIcon = "assets/icons/pharmacy_icon.svg";
+  static const ellipseIcon = "assets/icons/ellipse.svg";
+  static const greenHospitalIcon = "assets/icons/green_hospital_icon.svg";
+  static const noteIcon = "assets/icons/note.svg";
+  static const medalIcon = "assets/icons/medal.svg";
   // static const checkmark = "assets/icons/checkmark.svg";
   // static const checkmark = "assets/icons/checkmark.svg";
   // static const checkmark = "assets/icons/checkmark.svg";

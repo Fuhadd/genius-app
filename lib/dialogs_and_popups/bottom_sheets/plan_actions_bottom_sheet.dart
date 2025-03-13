@@ -1,7 +1,6 @@
-import 'package:dotted_line/dotted_line.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
 import 'package:genius_app/constants/route_constants.dart';
@@ -121,6 +120,29 @@ void showPlanActionsBottomSheet(BuildContext context) {
               ),
             ),
           );
+        });
+      });
+}
+
+void showBuyPlanOptionsBottomSheet(BuildContext context, {required Widget child }) {
+  showModalBottomSheet(
+      isScrollControlled: true,
+      isDismissible: true,
+      enableDrag: true,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r))),
+      backgroundColor: Colors.white,
+      elevation: 0,
+      barrierColor: Colors.black.withOpacity(0.6),
+      context: context,
+      builder: (context) {
+        return LayoutBuilder(builder: (context, constraints) {
+          return ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height *
+                    0.8, // max height constraint
+              ),
+              child: child);
         });
       });
 }

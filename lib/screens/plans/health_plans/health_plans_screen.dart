@@ -915,17 +915,20 @@ class OptionsWidget extends StatelessWidget {
           horizontalSpacer(12.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               semiBoldText(
                 title,
                 fontSize: 14.sp,
                 color: CustomColors.newGreenTextColor,
               ),
-              mediumText(
-                subtitle,
-                fontSize: 12.sp,
-                color: CustomColors.grey800Color,
-              )
+              subtitle.isEmpty
+                  ? SizedBox.shrink()
+                  : mediumText(
+                      subtitle,
+                      fontSize: 12.sp,
+                      color: CustomColors.grey800Color,
+                    )
             ],
           ),
           Spacer(),
