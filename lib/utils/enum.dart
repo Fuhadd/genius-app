@@ -40,6 +40,7 @@ enum HospitalCategory {
 }
 
 enum PlanSummaryType {
+  newPlanPurchase,
   changeCoverPeriod,
   planAdjustment,
 }

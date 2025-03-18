@@ -59,4 +59,5 @@ class RouteConstants {
   static const String buyPlanOverviewScreen = '/buyPlanOverviewScreen';
 
   static const String selectCoverageTypeScreen = '/selectCoverageTypeScreen';
+  static const String coverageTypeOptionsScreen = '/coverageTypeOptionsScreen';
 }

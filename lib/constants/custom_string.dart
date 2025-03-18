@@ -164,6 +164,7 @@ class ConstantString {
   static const virtualConsultationIcon =
       "assets/icons/virtual_consultation_icon.svg";
   static const addedDependantIcon = "assets/icons/added_dependant_icon.svg";
+  static const addCircleIcon = "assets/icons/add_circle_icon.svg";
   static const orangeMoneyIcon = "assets/icons/orange_money_icon.svg";
   static const greenMoneyIcon = "assets/icons/green_money_icon.svg";
   static const pinkMoneyIcon = "assets/icons/pink_money_icon.svg";
@@ -211,6 +212,7 @@ class ConstantString {
   static const greenHospitalIcon = "assets/icons/green_hospital_icon.svg";
   static const noteIcon = "assets/icons/note.svg";
   static const medalIcon = "assets/icons/medal.svg";
+  static const familyAvatars = "assets/icons/family_avatars.svg";
   // static const checkmark = "assets/icons/checkmark.svg";
   // static const checkmark = "assets/icons/checkmark.svg";
   // static const checkmark = "assets/icons/checkmark.svg";

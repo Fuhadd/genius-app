@@ -5,6 +5,7 @@ import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
 import 'package:genius_app/constants/route_constants.dart';
 import 'package:genius_app/dialogs_and_popups/bottom_sheets/dependant_removed_bottom_sheet.dart';
+import 'package:genius_app/models/screen_prop_models/plan_summary_model.dart';
 import 'package:genius_app/utils/custom_text_styles.dart';
 import 'package:genius_app/utils/enum.dart';
 import 'package:genius_app/utils/spacers.dart';
@@ -18,6 +19,7 @@ import 'package:go_router/go_router.dart';
 void showMakePaymentBottomSheet(
   BuildContext context, {
   bool isRenewal = false,
+  bool isNewPurchase = false,
 }) {
   showModalBottomSheet(
       isScrollControlled: true,
@@ -135,6 +137,13 @@ void showMakePaymentBottomSheet(
                               context.pop();
                               context.pushReplacementNamed(
                                 RouteConstants.renewalSuccessfulScreen,
+                              );
+                            } else if (isNewPurchase) {
+                              context.pushReplacementNamed(
+                                extra: PlanSummaryScreenModel(
+                                    planSummaryType:
+                                        PlanSummaryType.newPlanPurchase),
+                                RouteConstants.paymentSuccessfulScreen,
                               );
                             } else {
                               context.pop();

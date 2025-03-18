@@ -119,7 +119,7 @@ class HosipitalListBottomsheet extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   semiBoldText(
-                                    '45 NAF Hospital - Makurdi',
+                                    '45 NAF Hospital - Makurdi - ${index + 1}',
                                     fontSize: 14.sp,
                                   ),
                                   mediumText(

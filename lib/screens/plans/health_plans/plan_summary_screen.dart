@@ -99,7 +99,9 @@ class _PlanSummaryScreenState extends ConsumerState<PlanSummaryScreen> {
                                 widget.data.planSummaryType ==
                                             PlanSummaryType.changeCoverPeriod ||
                                         widget.data.planSummaryType ==
-                                            PlanSummaryType.planAdjustment
+                                            PlanSummaryType.planAdjustment ||
+                                        widget.data.planSummaryType ==
+                                            PlanSummaryType.newPlanPurchase
                                     ? ConstantString.editCoverPeriodIcon
                                     : ConstantString.scanUserIcon,
                               ),
@@ -149,28 +151,47 @@ class _PlanSummaryScreenState extends ConsumerState<PlanSummaryScreen> {
                                   subtitle: widget.data.planSummaryType ==
                                           PlanSummaryType.changeCoverPeriod
                                       ? 'Myself and Others'
-                                      : 'Others',
+                                      : widget.data.planSummaryType ==
+                                              PlanSummaryType.newPlanPurchase
+                                          ? 'Standard'
+                                          : 'Others',
                                 ),
-                          DependantDetailsContainer(
-                            title: widget.data.planSummaryType ==
-                                    PlanSummaryType.changeCoverPeriod
-                                ? widget.data.planSummaryType ==
-                                        PlanSummaryType.planAdjustment
-                                    ? 'Persons Covered'
-                                    : 'Policies'
-                                : 'New dependant(s)',
-                            subtitle: '5',
-                          ),
+                          if (widget.data.planSummaryType !=
+                              PlanSummaryType.newPlanPurchase)
+                            DependantDetailsContainer(
+                              title: widget.data.planSummaryType ==
+                                      PlanSummaryType.changeCoverPeriod
+                                  ? widget.data.planSummaryType ==
+                                          PlanSummaryType.planAdjustment
+                                      ? 'Persons Covered'
+                                      : 'Policies'
+                                  : 'New dependant(s)',
+                              subtitle: '5',
+                            ),
                           widget.data.planSummaryType ==
                                       PlanSummaryType.changeCoverPeriod ||
                                   widget.data.planSummaryType ==
-                                      PlanSummaryType.planAdjustment
+                                      PlanSummaryType.planAdjustment ||
+                                  widget.data.planSummaryType ==
+                                      PlanSummaryType.newPlanPurchase
                               ? SizedBox.shrink()
                               : DependantDetailsContainer(
                                   title: 'Updated dependant(s)',
                                   subtitle: '9',
                                 ),
-                          verticalSpacer(30),
+                          if (widget.data.planSummaryType ==
+                              PlanSummaryType.newPlanPurchase)
+                            DependantDetailsContainer(
+                              title: 'Coverage',
+                              subtitle: 'For Myself',
+                            ),
+                          DependantDetailsContainer(
+                            title: 'Expiry date',
+                            subtitle: '8th March, 2025',
+                          ),
+                          if (widget.data.planSummaryType !=
+                              PlanSummaryType.newPlanPurchase)
+                            verticalSpacer(30),
                         ],
                       ),
                     ),
@@ -221,7 +242,10 @@ class _PlanSummaryScreenState extends ConsumerState<PlanSummaryScreen> {
                       ],
                     ),
                   ),
-                  verticalSpacer(48.h),
+                  (widget.data.planSummaryType ==
+                          PlanSummaryType.newPlanPurchase)
+                      ? verticalSpacer(32.h)
+                      : verticalSpacer(48.h),
                   CustomButton(
                       title: widget.data.planSummaryType ==
                               PlanSummaryType.changeCoverPeriod
@@ -233,9 +257,14 @@ class _PlanSummaryScreenState extends ConsumerState<PlanSummaryScreen> {
                               showCoverPeriodChangedBottomSheet(context,
                                   isAdjustPlan: true);
                             }
-                          : () {
-                              showCoverPeriodChangedBottomSheet(context);
-                            }),
+                          : widget.data.planSummaryType ==
+                                  PlanSummaryType.newPlanPurchase
+                              ? () {
+                                  showMakePaymentBottomSheet(context,isNewPurchase: true);
+                                }
+                              : () {
+                                  showCoverPeriodChangedBottomSheet(context);
+                                }),
                   Spacer(),
                   verticalSpacer(MediaQuery.of(context).padding.bottom + 20),
                 ],
