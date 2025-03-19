@@ -16,6 +16,7 @@ FormBuilderTextField customTextField(String name, String labelText,
     bool obscureText = false,
     String? helperText,
     Widget? suffix,
+    Color? enabledBorderColor,
     String? Function(String?)? validator,
     void Function()? onSuffixTap,
     void Function(String?)? onChanged}) {
@@ -40,6 +41,7 @@ FormBuilderTextField customTextField(String name, String labelText,
       helperText: helperText,
       onSuffixTap: onSuffixTap,
       suffix: suffix,
+      enabledBorderColor: enabledBorderColor
     ),
   );
 }
@@ -54,6 +56,7 @@ InputDecoration customFormDecoration(
   bool isHint = false,
   void Function()? onSuffixTap,
   Widget? suffix,
+  Color? enabledBorderColor
 }) {
   return InputDecoration(
     // hintText: isHint ? '' : hintText,
@@ -73,9 +76,9 @@ InputDecoration customFormDecoration(
     filled: true,
     fillColor: CustomColors.formBgColor,
 
-    enabledBorder: const OutlineInputBorder(
+    enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(
-        color: Colors.transparent,
+        color: enabledBorderColor?? Colors.transparent,
       ),
       borderRadius: BorderRadius.all(
         Radius.circular(8),
@@ -154,6 +157,7 @@ Widget customTextFieldWithText(String name, String labelText,
     String? helperText,
     Widget? suffix,
     int? maxLines = 1,
+    Color? enabledBorderColor,
     String? Function(String?)? validator,
     void Function()? onSuffixTap,
     void Function(String?)? onChanged}) {
@@ -207,6 +211,7 @@ InputDecoration customFormDecorationWithText(
   String? helperText,
   Widget? prefix,
   bool isHint = false,
+  Color? enabledBorderColor,
   void Function()? onSuffixTap,
   Widget? suffix,
 }) {
@@ -228,9 +233,9 @@ InputDecoration customFormDecorationWithText(
     filled: true,
     fillColor: CustomColors.formBgColor,
 
-    enabledBorder: const OutlineInputBorder(
+    enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(
-        color: CustomColors.grey100Color,
+        color:enabledBorderColor?? CustomColors.grey100Color,
       ),
       borderRadius: BorderRadius.all(
         Radius.circular(8),

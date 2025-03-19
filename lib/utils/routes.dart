@@ -20,6 +20,8 @@ import 'package:genius_app/screens/onboarding/onboarding_page_view.dart';
 import 'package:genius_app/screens/onboarding/plain_set_password_screen.dart';
 import 'package:genius_app/screens/onboarding/plain_verify_otp_screen.dart';
 import 'package:genius_app/screens/onboarding/second_onboarding_screen.dart';
+import 'package:genius_app/screens/plans/health_plans/activate_plan/activate_plan_comfirm_policy_screen.dart.dart';
+import 'package:genius_app/screens/plans/health_plans/activate_plan/activate_plan_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/add_dependant_form_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/add_dependant_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/auto_renewal_screen.dart';
@@ -28,6 +30,7 @@ import 'package:genius_app/screens/plans/health_plans/buy_plan_new_user/buy_plan
 import 'package:genius_app/screens/plans/health_plans/buy_plan_new_user/coverage_type_options_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/buy_plan_new_user/select_coverage_type_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/buy_plan_new_user/select_plan_screen.dart';
+import 'package:genius_app/screens/plans/health_plans/buy_plan_new_user/upload__image_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/change_plans_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/compare_plans_table_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/deactivate_plan_screen.dart';
@@ -383,7 +386,9 @@ final GoRouter router = GoRouter(
       builder: (context, state) {
         final PlanSummaryScreenModel data =
             state.extra as PlanSummaryScreenModel;
-        return PaymentSuccessfulScreen(data: data,);
+        return PaymentSuccessfulScreen(
+          data: data,
+        );
       },
     ),
     GoRoute(
@@ -487,7 +492,7 @@ final GoRouter router = GoRouter(
         return HospitalDetailsScreen();
       },
     ),
-    
+
     GoRoute(
       name: RouteConstants.selectPlanScreen,
       path: RouteConstants.selectPlanScreen,
@@ -495,14 +500,14 @@ final GoRouter router = GoRouter(
         return SelectPlanScreen();
       },
     ),
-     GoRoute(
+    GoRoute(
       name: RouteConstants.buyPlanOverviewScreen,
       path: RouteConstants.buyPlanOverviewScreen,
       builder: (context, state) {
         return BuyPlanOverviewScreen();
       },
     ),
-     GoRoute(
+    GoRoute(
       name: RouteConstants.selectCoverageTypeScreen,
       path: RouteConstants.selectCoverageTypeScreen,
       builder: (context, state) {
@@ -514,6 +519,30 @@ final GoRouter router = GoRouter(
       path: RouteConstants.coverageTypeOptionsScreen,
       builder: (context, state) {
         return CoverageTypeOptionsScreen();
+      },
+    ),
+    GoRoute(
+      name: RouteConstants.activatePlanScreen,
+      path: RouteConstants.activatePlanScreen,
+      builder: (context, state) {
+        return ActivatePlanScreen();
+      },
+    ),
+    GoRoute(
+      name: RouteConstants.uploadImageScreen,
+      path: RouteConstants.uploadImageScreen,
+      builder: (context, state) {
+        return UploadImageScreen();
+      },
+    ),
+    GoRoute(
+      name: RouteConstants.activatePlanConfirmPolicyScreen,
+      path: RouteConstants.activatePlanConfirmPolicyScreen,
+      builder: (context, state) {
+        final SendActivationEmailModel data =
+            state.extra as SendActivationEmailModel;
+
+        return ActivatePlanConfirmPolicyScreen(data: data);
       },
     ),
   ],

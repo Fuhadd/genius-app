@@ -306,7 +306,7 @@ class _SelectPlanScreenState extends State<SelectPlanScreen>
                     onTap: selectedNewHealthPlan == null
                         ? null
                         : () {
-                            context.pushReplacementNamed(
+                            context.pushNamed(
                               RouteConstants.buyPlanOverviewScreen,
                             );
                           },

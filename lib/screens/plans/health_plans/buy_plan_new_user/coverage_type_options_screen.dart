@@ -165,7 +165,7 @@ class _CoverageTypeOptionsScreenState
                       ref.watch(policyOwnerProvider) == null)
                   ? null
                   : () {
-                      context.pushReplacementNamed(
+                      context.pushNamed(
                         extra: PlanSummaryScreenModel(
                             planSummaryType: PlanSummaryType.newPlanPurchase),
                         RouteConstants.planSummaryScreen,

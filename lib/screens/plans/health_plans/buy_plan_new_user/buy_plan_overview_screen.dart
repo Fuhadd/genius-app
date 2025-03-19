@@ -200,7 +200,7 @@ class _BuyPlanOverviewScreenState extends State<BuyPlanOverviewScreen> {
             CustomButton(
               title: 'Continue',
               onTap: () {
-                context.pushReplacementNamed(
+                context.pushNamed(
                   RouteConstants.selectCoverageTypeScreen,
                 );
               },

@@ -95,7 +95,7 @@ class _SelectCoverageTypeScreenState extends State<SelectCoverageTypeScreen> {
               onTap: selectedIndex == 0
                   ? null
                   : () {
-                      context.pushReplacementNamed(
+                      context.pushNamed(
                         RouteConstants.coverageTypeOptionsScreen,
                       );
                     },
