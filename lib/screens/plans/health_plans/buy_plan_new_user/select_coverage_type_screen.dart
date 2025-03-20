@@ -89,7 +89,7 @@ class _SelectCoverageTypeScreenState extends State<SelectCoverageTypeScreen> {
                 ),
               ],
             ),
-            verticalSpacer(MediaQuery.sizeOf(context).width),
+            Spacer(),
             CustomButton(
               title: 'Continue',
               onTap: selectedIndex == 0

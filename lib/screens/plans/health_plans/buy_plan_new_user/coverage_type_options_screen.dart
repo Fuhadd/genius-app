@@ -78,8 +78,8 @@ class _CoverageTypeOptionsScreenState
                 ),
                 horizontalSpacer(10.w),
                 Container(
-                  height: 59.h,
-                  width: 85.w,
+                  height: 70.h,
+                  width: 90.w,
                   decoration: BoxDecoration(
                     color: CustomColors.whiteColor,
                     borderRadius: BorderRadius.circular(2),
@@ -88,7 +88,7 @@ class _CoverageTypeOptionsScreenState
                     ),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(5.r),
+                    padding: EdgeInsets.all(5.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -158,7 +158,7 @@ class _CoverageTypeOptionsScreenState
                       fontSize: 14.sp, color: CustomColors.green500Color)
                 ],
               ),
-            verticalSpacer(MediaQuery.sizeOf(context).width * 0.6),
+            Spacer(),
             CustomButton(
               title: 'Continue',
               onTap: (ref.watch(coverPeriodProvider) == null ||

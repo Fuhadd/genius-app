@@ -157,15 +157,20 @@ class PlanBenefitsBottomSheet extends StatelessWidget {
   }
 }
 
+
 class PlanBenefitSectionSingleItemWidget extends StatelessWidget {
   const PlanBenefitSectionSingleItemWidget({
     super.key,
     required this.titleWidget,
     required this.bulletPoints,
+    this.bulletPointPadding,
+    this.bulletPointsfontSize,
   });
 
   final Widget titleWidget;
   final List<String> bulletPoints;
+  final EdgeInsets? bulletPointPadding;
+  final double? bulletPointsfontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -183,23 +188,27 @@ class PlanBenefitSectionSingleItemWidget extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             padding: EdgeInsets.zero,
             itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        ConstantString.ellipseIcon,
-                        colorFilter: ColorFilter.mode(
-                            CustomColors.orange500Color, BlendMode.srcIn),
-                      ),
-                      horizontalSpacer(10.w),
-                      Expanded(
-                        child: mediumText(bulletPoints[index],
-                            color: CustomColors.grey800Color, fontSize: 12.sp),
-                      )
-                    ],
-                  ),
-                ],
+              return Padding(
+                padding: bulletPointPadding ?? EdgeInsets.zero,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          ConstantString.ellipseIcon,
+                          colorFilter: ColorFilter.mode(
+                              CustomColors.orange500Color, BlendMode.srcIn),
+                        ),
+                        horizontalSpacer(10.w),
+                        Expanded(
+                          child: mediumText(bulletPoints[index],
+                              color: CustomColors.grey800Color,
+                              fontSize: bulletPointsfontSize ?? 12.sp),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               );
             },
           ),
@@ -208,3 +217,4 @@ class PlanBenefitSectionSingleItemWidget extends StatelessWidget {
     );
   }
 }
+

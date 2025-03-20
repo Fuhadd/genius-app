@@ -108,7 +108,8 @@ class _PaymentSuccessfulScreenState extends State<PaymentSuccessfulScreen> {
                           verticalSpacer(20.h),
                           ThingsToKnowBulletPointWidget(
                               text:
-                                  "If you renew within 7 days of expiry, your hospital access will be available after a 24-hour wait. However, if you renew after 7 days of expiry, the waiting period extends to 7 days.")
+                                  "If you renew within 7 days of expiry, your hospital access will be available after a 24-hour wait. However, if you renew after 7 days of expiry, the waiting period extends to 7 days."),
+                          verticalSpacer(10.h),
                         ],
                       ),
                     ),

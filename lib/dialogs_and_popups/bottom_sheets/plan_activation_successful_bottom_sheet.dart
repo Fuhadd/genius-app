@@ -3,10 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
+import 'package:genius_app/constants/route_constants.dart';
+import 'package:genius_app/dialogs_and_popups/bottom_sheets/hospital_list_bottom_sheet.dart';
+import 'package:genius_app/dialogs_and_popups/bottom_sheets/plan_benefits_bottom_sheet.dart';
+import 'package:genius_app/models/screen_prop_models/health_plans_model.dart';
+import 'package:genius_app/screens/homepage/widgets/count_down_timer.dart';
 import 'package:genius_app/utils/custom_text_styles.dart';
 import 'package:genius_app/utils/spacers.dart';
+import 'package:genius_app/widgets/custom_button.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
 import 'package:genius_app/widgets/dotted_separator.dart';
+import 'package:go_router/go_router.dart';
 
 // Main widget for the screen
 class PlanActivationSuccessfulBottomSheet extends StatefulWidget {
@@ -42,16 +49,46 @@ class _PlanActivationSuccessfulBottomSheetState
               ],
             ),
             verticalSpacer(32.h),
-
-            // Section 2: General consultation
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      ConstantString.ellipseIcon,
+                      colorFilter: ColorFilter.mode(
+                          CustomColors.orange500Color, BlendMode.srcIn),
+                    ),
+                    horizontalSpacer(10.w),
+                    RichText(
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: 'This plan becomes active in ',
+                            style: CustomTextStyles.medium(
+                              color: CustomColors.primaryGreenColor,
+                              fontSize: 14.sp,
+                            )),
+                        TextSpan(
+                            text: '23:40:30. ',
+                            style: CustomTextStyles.semiBold(
+                              color: CustomColors.primaryGreenColor,
+                              fontSize: 14.sp,
+                            )),
+                        TextSpan(
+                            text: 'hours. ',
+                            style: CustomTextStyles.medium(
+                              color: CustomColors.primaryGreenColor,
+                              fontSize: 14.sp,
+                            )),
+                      ]),
+                    ),
+                  ],
+                ),
                 PlanBenefitSectionSingleItemWidget(
                     titleWidget: SizedBox.shrink(),
                     bulletPointPadding: EdgeInsets.only(bottom: 14.h),
+                    bulletPointsfontSize: 14.sp,
                     bulletPoints: [
-                      'This plan becomes active in 23:40:30 hours.',
                       'You can get quality treatment from any of our listed hospitals under your plan across Nigeria with your HMO I.D.'
                     ]),
                 Row(
@@ -79,69 +116,36 @@ class _PlanActivationSuccessfulBottomSheetState
                       ]),
                     ),
                   ],
-                )
+                ),
+                Center(
+                  child: CountdownTimer(
+                    duration: const Duration(hours: 24),
+                  ),
+                ),
+                verticalSpacer(16.h),
+                CustomButton(
+                    title: 'Go to my plan',
+                    onTap: () {
+                      context.pushReplacementNamed(
+                        RouteConstants.healthPlansScreen,
+                        extra: HealthPlansModel(
+                          isExpired: false,
+                        ),
+                      );
+                    }),
+                verticalSpacer(16.h),
+                Center(
+                  child: boldText(
+                    'Learn about your new plan',
+                    fontSize: 16.sp,
+                    color: CustomColors.green500Color,
+                  ),
+                ),
+                verticalSpacer(MediaQuery.of(context).padding.bottom + 20),
               ],
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class PlanBenefitSectionSingleItemWidget extends StatelessWidget {
-  const PlanBenefitSectionSingleItemWidget({
-    super.key,
-    required this.titleWidget,
-    required this.bulletPoints,
-    this.bulletPointPadding,
-  });
-
-  final Widget titleWidget;
-  final List<String> bulletPoints;
-  final EdgeInsets? bulletPointPadding;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(minHeight: 62.sp),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          titleWidget,
-          verticalSpacer(10.h),
-          ListView.builder(
-            itemCount: bulletPoints.length,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.zero,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: bulletPointPadding ?? EdgeInsets.zero,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          ConstantString.ellipseIcon,
-                          colorFilter: ColorFilter.mode(
-                              CustomColors.orange500Color, BlendMode.srcIn),
-                        ),
-                        horizontalSpacer(10.w),
-                        Expanded(
-                          child: mediumText(bulletPoints[index],
-                              color: CustomColors.grey800Color,
-                              fontSize: 12.sp),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ],
       ),
     );
   }
