@@ -7,16 +7,18 @@ import 'package:genius_app/widgets/custom_text_widget.dart';
 
 class OtherProductContainer extends StatelessWidget {
   final String title, icon;
+  final EdgeInsets? iconPadding;
   const OtherProductContainer({
     super.key,
     required this.title,
     required this.icon,
+    this.iconPadding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 12.w),
+      padding: iconPadding ?? EdgeInsets.only(right: 12.w),
       child: Container(
         height: 105.h,
         width: 115.w,

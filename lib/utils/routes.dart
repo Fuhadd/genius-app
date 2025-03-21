@@ -26,6 +26,7 @@ import 'package:genius_app/screens/plans/health_plans/add_dependant_form_screen.
 import 'package:genius_app/screens/plans/health_plans/add_dependant_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/auto_renewal_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/buy_dependant_slot_screen.dart';
+import 'package:genius_app/screens/plans/health_plans/buy_plan/buy_plan_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/buy_plan/health_plan_overview_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/buy_plan/coverage_type_options_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/buy_plan/select_coverage_type_screen.dart';
@@ -498,6 +499,13 @@ final GoRouter router = GoRouter(
       path: RouteConstants.selectHealthPlanScreen,
       builder: (context, state) {
         return SelectHealthPlanScreen();
+      },
+    ),
+    GoRoute(
+      name: RouteConstants.buyPlanScreen,
+      path: RouteConstants.buyPlanScreen,
+      builder: (context, state) {
+        return BuyPlanScreen();
       },
     ),
     GoRoute(

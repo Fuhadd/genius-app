@@ -119,7 +119,7 @@ class _SelectCoverageTypeScreenState
                       ? HelperText(
                           text: 'Covers your immediate family members.')
                       : CoverageTypeITemWidget(
-                          icon: ConstantString.familyAvatars,
+                          icon: ConstantString.familyAvatarsIcon,
                           text: 'Family plan',
                           color: CustomColors.blueColor,
                         ),
@@ -174,7 +174,7 @@ class CoverageTypeITemWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
-            ConstantString.familyAvatars,
+            ConstantString.familyAvatarsIcon,
             color: color,
           ),
           verticalSpacer(10.h),

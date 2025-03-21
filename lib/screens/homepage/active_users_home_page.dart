@@ -5,11 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
+import 'package:genius_app/constants/route_constants.dart';
 import 'package:genius_app/screens/homepage/widgets/other_product_container.dart';
 import 'package:genius_app/screens/homepage/widgets/plans_count_container.dart';
 import 'package:genius_app/utils/custom_text_styles.dart';
 import 'package:genius_app/utils/spacers.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class ActiveUsersHomePage extends StatelessWidget {
   const ActiveUsersHomePage({
@@ -252,9 +254,14 @@ class ActiveUsersHomePage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: Row(
                       children: [
-                        CircularOptionsContainer(
-                          icon: ConstantString.buyPlanIcon,
-                          title: 'Buy Plan',
+                        GestureDetector(
+                          onTap: () {
+                            context.pushNamed(RouteConstants.buyPlanScreen);
+                          },
+                          child: CircularOptionsContainer(
+                            icon: ConstantString.buyPlanIcon,
+                            title: 'Buy Plan',
+                          ),
                         ),
                         horizontalSpacer(16.w),
                         CircularOptionsContainer(
@@ -718,32 +725,30 @@ class CircularOptionsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Container(
-            // height: 78.h,
-            decoration: BoxDecoration(
-              color: CustomColors.whiteColor,
-              shape: BoxShape.circle,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(22.0),
-              child: Center(
-                child: SvgPicture.asset(
-                  icon,
-                ),
+    return Column(
+      children: [
+        Container(
+          // height: 78.h,
+          decoration: BoxDecoration(
+            color: CustomColors.whiteColor,
+            shape: BoxShape.circle,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(22.0),
+            child: Center(
+              child: SvgPicture.asset(
+                icon,
               ),
             ),
           ),
-          verticalSpacer(8.h),
-          semiBoldText(
-            title,
-            fontSize: 12.sp,
-            color: CustomColors.grey800Color,
-          ),
-        ],
-      ),
+        ),
+        verticalSpacer(8.h),
+        semiBoldText(
+          title,
+          fontSize: 12.sp,
+          color: CustomColors.grey800Color,
+        ),
+      ],
     );
   }
 }

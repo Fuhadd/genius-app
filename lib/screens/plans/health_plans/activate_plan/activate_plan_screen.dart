@@ -209,7 +209,7 @@ class CoverageTypeITemWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
-            ConstantString.familyAvatars,
+            ConstantString.familyAvatarsIcon,
             color: color,
           ),
           verticalSpacer(10.h),

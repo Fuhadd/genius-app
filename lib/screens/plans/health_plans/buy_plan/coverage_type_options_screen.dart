@@ -28,6 +28,7 @@ class CoverageTypeOptionsScreen extends ConsumerStatefulWidget {
 
 int selectedIndex = 0;
 int numberOfdependants = 0;
+double policyAmount = 0;
 
 class _CoverageTypeOptionsScreenState
     extends ConsumerState<CoverageTypeOptionsScreen> {
@@ -78,7 +79,7 @@ class _CoverageTypeOptionsScreenState
                     ),
                   ],
                 ),
-                horizontalSpacer(10.w),
+                Spacer(),
                 Container(
                   height: 70.h,
                   width: 90.w,
@@ -151,7 +152,7 @@ class _CoverageTypeOptionsScreenState
               ],
             ),
             customTextFieldWithText(
-              'National Identity Number (NIN)',
+              '',
               numberOfdependants.toString(),
               title: 'Number of dependants',
               enabledBorderColor: CustomColors.grey100Color,
@@ -160,11 +161,12 @@ class _CoverageTypeOptionsScreenState
               },
             ),
             verticalSpacer(24.h),
-            if (ref.watch(policyOwnerProvider) != null)
+            if (ref.watch(policyOwnerProvider) == "For Others")
               GestureDetector(
                 onTap: () {
                   setState(() {
                     numberOfdependants++;
+                    policyAmount = numberOfdependants * 3500;
                   });
                 },
                 child: Row(
@@ -177,6 +179,38 @@ class _CoverageTypeOptionsScreenState
                   ],
                 ),
               ),
+            Container(
+              height: 48.h,
+              width: MediaQuery.sizeOf(context).width,
+              decoration: BoxDecoration(
+                color: CustomColors.orange50Color,
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              padding: EdgeInsets.only(left: 10.w, right: 10.w),
+              child: Center(
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                          text: "₦",
+                          style: TextStyle(
+                            fontFamily: '',
+                            fontWeight: FontWeight.w600,
+                            color: CustomColors.greenText100Color,
+                            fontSize: 14.sp,
+                          )),
+                      TextSpan(
+                        text: '${policyAmount.toStringAsFixed(0)}',
+                        style: CustomTextStyles.semiBold(
+                          color: CustomColors.greenText100Color,
+                          fontSize: 16.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             Spacer(),
             CustomButton(
               title: 'Continue',
@@ -226,7 +260,7 @@ class CoverageTypeITemWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
-            ConstantString.familyAvatars,
+            ConstantString.familyAvatarsIcon,
             color: color,
           ),
           verticalSpacer(10.h),
