@@ -15,14 +15,14 @@ import 'package:genius_app/widgets/custom_button.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
 import 'package:go_router/go_router.dart';
 
-class BuyPlanOverviewScreen extends StatefulWidget {
-  const BuyPlanOverviewScreen({super.key});
+class HealthPlanOverviewScreen extends StatefulWidget {
+  const HealthPlanOverviewScreen({super.key});
 
   @override
-  State<BuyPlanOverviewScreen> createState() => _BuyPlanOverviewScreenState();
+  State<HealthPlanOverviewScreen> createState() => _HealthPlanOverviewScreenState();
 }
 
-class _BuyPlanOverviewScreenState extends State<BuyPlanOverviewScreen> {
+class _HealthPlanOverviewScreenState extends State<HealthPlanOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

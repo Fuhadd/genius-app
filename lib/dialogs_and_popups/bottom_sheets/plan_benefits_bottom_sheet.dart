@@ -157,20 +157,19 @@ class PlanBenefitsBottomSheet extends StatelessWidget {
   }
 }
 
-
 class PlanBenefitSectionSingleItemWidget extends StatelessWidget {
   const PlanBenefitSectionSingleItemWidget({
     super.key,
     required this.titleWidget,
     required this.bulletPoints,
     this.bulletPointPadding,
-    this.bulletPointsfontSize,
+    this.bulletPointfontSize,
   });
 
   final Widget titleWidget;
   final List<String> bulletPoints;
   final EdgeInsets? bulletPointPadding;
-  final double? bulletPointsfontSize;
+  final double? bulletPointfontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +202,7 @@ class PlanBenefitSectionSingleItemWidget extends StatelessWidget {
                         Expanded(
                           child: mediumText(bulletPoints[index],
                               color: CustomColors.grey800Color,
-                              fontSize: bulletPointsfontSize ?? 12.sp),
+                              fontSize: bulletPointfontSize ?? 12.sp),
                         )
                       ],
                     ),
@@ -217,4 +216,3 @@ class PlanBenefitSectionSingleItemWidget extends StatelessWidget {
     );
   }
 }
-

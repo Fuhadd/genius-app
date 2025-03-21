@@ -87,7 +87,7 @@ class _PlanActivationSuccessfulBottomSheetState
                 PlanBenefitSectionSingleItemWidget(
                     titleWidget: SizedBox.shrink(),
                     bulletPointPadding: EdgeInsets.only(bottom: 14.h),
-                    bulletPointsfontSize: 14.sp,
+                    bulletPointfontSize: 14.sp,
                     bulletPoints: [
                       'You can get quality treatment from any of our listed hospitals under your plan across Nigeria with your HMO I.D.'
                     ]),

@@ -67,12 +67,7 @@ class _BottomNavigationScreenState extends ConsumerState<BottomNavigationScreen>
               backgroundColor: CustomColors.green400Color,
               elevation: 0,
               onPressed:  () {
-        context.pushNamed(
-          RouteConstants.selectPlanScreen,
-          extra: HealthPlansModel(
-            isExpired: false,
-          ),
-        );
+       
       },
               shape: RoundedRectangleBorder(
                 side: const BorderSide(

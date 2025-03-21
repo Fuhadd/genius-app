@@ -10,6 +10,7 @@ import 'package:genius_app/utils/enum.dart';
 import 'package:genius_app/utils/spacers.dart';
 import 'package:genius_app/widgets/custom_button.dart';
 import 'package:genius_app/widgets/custom_list_dropdown_field.dart';
+import 'package:genius_app/widgets/custom_text_field.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -26,6 +27,7 @@ class CoverageTypeOptionsScreen extends ConsumerStatefulWidget {
 }
 
 int selectedIndex = 0;
+int numberOfdependants = 0;
 
 class _CoverageTypeOptionsScreenState
     extends ConsumerState<CoverageTypeOptionsScreen> {
@@ -148,15 +150,32 @@ class _CoverageTypeOptionsScreenState
                 ),
               ],
             ),
+            customTextFieldWithText(
+              'National Identity Number (NIN)',
+              numberOfdependants.toString(),
+              title: 'Number of dependants',
+              enabledBorderColor: CustomColors.grey100Color,
+              onChanged: (v) {
+                setState(() {});
+              },
+            ),
+            verticalSpacer(24.h),
             if (ref.watch(policyOwnerProvider) != null)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SvgPicture.asset(ConstantString.addCircleIcon),
-                  horizontalSpacer(5.w),
-                  semiBoldText('Add Dependants?',
-                      fontSize: 14.sp, color: CustomColors.green500Color)
-                ],
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    numberOfdependants++;
+                  });
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SvgPicture.asset(ConstantString.addCircleIcon),
+                    horizontalSpacer(5.w),
+                    semiBoldText('Add Dependants?',
+                        fontSize: 14.sp, color: CustomColors.green500Color)
+                  ],
+                ),
               ),
             Spacer(),
             CustomButton(

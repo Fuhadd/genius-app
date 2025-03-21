@@ -37,8 +37,7 @@ class RouteConstants {
   static const String dependantAddedScreen = '/dependantAddedScreen';
   static const String uploadDependantImageScreen =
       '/uploadDependantImageScreen';
-    static const String uploadImageScreen =
-      '/uploadImageScreen';
+  static const String uploadImageScreen = '/uploadImageScreen';
 
   static const String buyDependantSlotScreen = '/buyDependantSlotScreen';
   static const String planSummaryScreen = '/planSummaryScreen';
@@ -57,11 +56,12 @@ class RouteConstants {
   static const String visitHospitalScreen = '/visitHospitalScreen';
   static const String hospitalDetailsScreen = '/hospitalDetailsScreen';
 
-  static const String selectPlanScreen = '/selectPlanScreen';
-  static const String buyPlanOverviewScreen = '/buyPlanOverviewScreen';
+  static const String selectHealthPlanScreen = '/selectHealthPlanScreen';
+  static const String healthPlanOverviewScreen = '/buyPlanOverviewScreen';
 
   static const String selectCoverageTypeScreen = '/selectCoverageTypeScreen';
   static const String coverageTypeOptionsScreen = '/coverageTypeOptionsScreen';
   static const String activatePlanScreen = '/activatePlanScreen';
-  static const String activatePlanConfirmPolicyScreen = '/activatePlanConfirmPolicyScreen';
+  static const String activatePlanConfirmPolicyScreen =
+      '/activatePlanConfirmPolicyScreen';
 }

@@ -8,22 +8,44 @@ import 'package:genius_app/utils/spacers.dart';
 import 'package:genius_app/widgets/custom_button.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SelectCoverageTypeScreen extends StatefulWidget {
+enum CoverageTypeOptions { justMe, myselfAndOthers, others, myselfAndFamily }
+
+class CoverageOptionsModel {
+  CoverageOptionsModel({
+    this.coverageTypeOptions,
+    this.coverPeriod,
+    this.totalfamilySize,
+    this.includeMe,
+    this.numberOfdependants = 0,
+  });
+  CoverageTypeOptions? coverageTypeOptions;
+  String? coverPeriod;
+  String? totalfamilySize;
+  bool? includeMe;
+  int numberOfdependants;
+}
+
+final coverageOptionsModelProvider = StateProvider<CoverageOptionsModel>(
+  (ref) => CoverageOptionsModel(),
+);
+
+class SelectCoverageTypeScreen extends ConsumerStatefulWidget {
   const SelectCoverageTypeScreen({super.key});
 
   @override
-  State<SelectCoverageTypeScreen> createState() =>
+  ConsumerState<SelectCoverageTypeScreen> createState() =>
       _SelectCoverageTypeScreenState();
 }
 
 int selectedIndex = 0;
 
-class _SelectCoverageTypeScreenState extends State<SelectCoverageTypeScreen> {
+class _SelectCoverageTypeScreenState
+    extends ConsumerState<SelectCoverageTypeScreen> {
   @override
   void initState() {
     super.initState();
-    selectedIndex = 0;
   }
 
   @override
@@ -65,10 +87,17 @@ class _SelectCoverageTypeScreenState extends State<SelectCoverageTypeScreen> {
               children: [
                 GestureDetector(
                   onTap: () => setState(() {
-                    selectedIndex = 1;
+                    ref
+                            .read(coverageOptionsModelProvider.notifier)
+                            .state
+                            .coverageTypeOptions =
+                        CoverageTypeOptions.myselfAndFamily;
                   }),
-                  child: selectedIndex == 1
-                      ? HelperText(text: 'Covers just You')
+                  child: ref
+                              .watch(coverageOptionsModelProvider)
+                              .coverageTypeOptions ==
+                          CoverageTypeOptions.myselfAndFamily
+                      ? HelperText(text: 'covers you and your loved ones')
                       : CoverageTypeITemWidget(
                           icon: ConstantString.profileIcon,
                           text: 'Standard Plan',
@@ -77,10 +106,18 @@ class _SelectCoverageTypeScreenState extends State<SelectCoverageTypeScreen> {
                 horizontalSpacer(22.w),
                 GestureDetector(
                   onTap: () => setState(() {
-                    selectedIndex = 2;
+                    ref
+                            .read(coverageOptionsModelProvider.notifier)
+                            .state
+                            .coverageTypeOptions =
+                        CoverageTypeOptions.myselfAndOthers;
                   }),
-                  child: selectedIndex == 2
-                      ? HelperText(text: 'covers you and your loved ones')
+                  child: ref
+                              .watch(coverageOptionsModelProvider)
+                              .coverageTypeOptions ==
+                          CoverageTypeOptions.myselfAndOthers
+                      ? HelperText(
+                          text: 'Covers your immediate family members.')
                       : CoverageTypeITemWidget(
                           icon: ConstantString.familyAvatars,
                           text: 'Family plan',
@@ -92,13 +129,15 @@ class _SelectCoverageTypeScreenState extends State<SelectCoverageTypeScreen> {
             Spacer(),
             CustomButton(
               title: 'Continue',
-              onTap: selectedIndex == 0
-                  ? null
-                  : () {
-                      context.pushNamed(
-                        RouteConstants.coverageTypeOptionsScreen,
-                      );
-                    },
+              onTap:
+                  ref.watch(coverageOptionsModelProvider).coverageTypeOptions ==
+                          null
+                      ? null
+                      : () {
+                          context.pushNamed(
+                            RouteConstants.coverageTypeOptionsScreen,
+                          );
+                        },
             ),
             verticalSpacer(MediaQuery.of(context).padding.bottom + 20),
           ],
@@ -168,11 +207,14 @@ class HelperText extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          mediumText(
-            text,
-            textAlign: TextAlign.center,
-            fontSize: 14.sp,
-            color: CustomColors.green500Color,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: mediumText(
+              text,
+              textAlign: TextAlign.center,
+              fontSize: 14.sp,
+              color: CustomColors.green500Color,
+            ),
           )
         ],
       ),

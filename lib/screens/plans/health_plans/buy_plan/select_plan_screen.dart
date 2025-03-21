@@ -13,16 +13,16 @@ import 'package:genius_app/widgets/custom_button.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
 import 'package:go_router/go_router.dart';
 
-class SelectPlanScreen extends StatefulWidget {
-  const SelectPlanScreen({
+class SelectHealthPlanScreen extends StatefulWidget {
+  const SelectHealthPlanScreen({
     super.key,
   });
 
   @override
-  State<SelectPlanScreen> createState() => _SelectPlanScreenState();
+  State<SelectHealthPlanScreen> createState() => _SelectHealthPlanScreenState();
 }
 
-class _SelectPlanScreenState extends State<SelectPlanScreen>
+class _SelectHealthPlanScreenState extends State<SelectHealthPlanScreen>
     with SingleTickerProviderStateMixin {
   HealthPlans? selectedNewHealthPlan;
   HealthPlans selectedHealthPlans = HealthPlans.flexicare;
@@ -307,7 +307,7 @@ class _SelectPlanScreenState extends State<SelectPlanScreen>
                         ? null
                         : () {
                             context.pushNamed(
-                              RouteConstants.buyPlanOverviewScreen,
+                              RouteConstants.healthPlanOverviewScreen,
                             );
                           },
                   ),
