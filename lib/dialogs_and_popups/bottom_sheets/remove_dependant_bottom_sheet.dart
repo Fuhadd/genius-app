@@ -13,7 +13,8 @@ import 'package:genius_app/widgets/grid_options_container.dart';
 import 'package:genius_app/widgets/grid_radio_chip_container.dart';
 import 'package:go_router/go_router.dart';
 
-void showRemoveDependantBottomSheet(BuildContext context) {
+void showRemoveDependantBottomSheet(BuildContext context,
+    {InsuranceType? insuranceType}) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: false,
@@ -51,7 +52,9 @@ void showRemoveDependantBottomSheet(BuildContext context) {
                             ),
                             horizontalSpacer(10.w),
                             boldText(
-                              'Remove Dependant',
+                              insuranceType == InsuranceType.vehicle
+                                  ? 'Remove Vehicle'
+                                  : 'Remove Dependant',
                               fontSize: 20.sp,
                               color: CustomColors.green400Color,
                               textAlign: TextAlign.center,
@@ -60,7 +63,9 @@ void showRemoveDependantBottomSheet(BuildContext context) {
                         ),
                         verticalSpacer(32.h),
                         mediumText(
-                          'You’re about to remove Alex Igwe as a dependant. Once removed, they will lose access to this plan and its benefits.',
+                          insuranceType == InsuranceType.vehicle
+                              ? 'You are about to remove this vehicle Tesla Model X as one of your vehicles. Please note that deactivating this vehicle will revoke their access to this plan and all associated benefits.'
+                              : 'You’re about to remove Alex Igwe as a dependant. Once removed, they will lose access to this plan and its benefits.',
                           fontSize: 14.sp,
                           color: CustomColors.blackTextColor,
                           textAlign: TextAlign.center,

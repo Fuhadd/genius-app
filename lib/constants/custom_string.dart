@@ -11,6 +11,12 @@ class ConstantString {
   static const bastionLogo = "assets/images/bastion_logo.png";
   static const paystackLogo = "assets/images/paystack_logo.png";
   static const blurredImage = "assets/images/blurred_image.png";
+  static const carLeftSide = "assets/images/car_left_side.png";
+  static const carRightSide = "assets/images/car_right_side.png";
+  static const carFrontSide = "assets/images/car_front_side.png";
+  static const carBackSide = "assets/images/car_back_side.png";
+  static const carOthersSide = "assets/images/car_others_side.png";
+  static const carChasisNumber = "assets/images/car_chasis_number.png";
 
   static const geniusLogoGreen = "assets/images/genius_logo_green.webp";
 
@@ -206,6 +212,52 @@ class ConstantString {
   static const starFilledIcon = "assets/icons/star_filled_icon.svg";
   static const starIcon = "assets/icons/star_icon.svg";
   static const pharmacyIcon = "assets/icons/pharmacy_icon.svg";
+  static const buyPlanIllus = "assets/icons/buy_plan_illus.svg";
+  static const healthCoverIllus = "assets/icons/health_cover_illus.svg";
+  static const autoCoverIllus = "assets/icons/auto_cover_illus.svg";
+  static const gadgetCoverIllus = "assets/icons/gadget_cover_illus.svg";
+  static const travelCoverIllus = "assets/icons/travel_cover_illus.svg";
+  static const comprehensiveAutoIllus =
+      "assets/icons/comprehensive_auto_illus.svg";
+  static const miniComprehensiveIllus =
+      "assets/icons/mini_comprehensive_illus.svg";
+  static const thirdPartyIllus = "assets/icons/third_party_illus.svg";
+  static const planBenefitIcon2 = "assets/icons/plan_benefit_icon2.svg";
+  static const planHowItWorksIcon = "assets/icons/plan_how_it_works_icon.svg";
+  static const planNeedToKnowIcon = "assets/icons/plan_need_to_know_icon.svg";
+  static const planHowToClaimIcon = "assets/icons/plan_how_to_claim_icon.svg";
+  static const addCircle = "assets/icons/add_circle.svg";
+  static const roundCarIcon = "assets/icons/round_car_icon.svg";
+  static const smallUploadIcon = "assets/icons/small_upload_icon.svg";
+  static const pdfIcon = "assets/icons/pdf_icon.svg";
+  static const trashIconOutline = "assets/icons/trash_icon_outline.svg";
+  static const pdfEyeIcon = "assets/icons/pdf_eye_icon.svg";
+  static const transCarIcon = "assets/icons/trans_car_icon.svg";
+  static const frontCarIcon = "assets/icons/front_car_icon.svg";
+  static const smallMakeClaimIcon = "assets/icons/small_make_claim_icon.svg";
+  static const birdClaimIcon = "assets/icons/bird_claim_icon.svg";
+  static const orangeRoundPattern = "assets/icons/orange_round_pattern.svg";
+  static const expandIcon = "assets/icons/expand_icon.svg";
+  static const trendDownIcon = "assets/icons/trend_down_icon.svg";
+  static const damageIcon = "assets/icons/damage_icon.svg";
+  static const smallGalleryIcon = "assets/icons/small_gallery_icon.svg";
+  static const searchInfoIcon = "assets/icons/search_info_icon.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
+  // static const checkmark = "assets/icons/checkmark.svg";
   // static const checkmark = "assets/icons/checkmark.svg";
   // static const checkmark = "assets/icons/checkmark.svg";
   // static const checkmark = "assets/icons/checkmark.svg";

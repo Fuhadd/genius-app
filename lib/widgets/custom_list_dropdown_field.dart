@@ -13,6 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomListDropdownField extends StatefulHookConsumerWidget {
   final String fieldName, label, description;
+  final Widget? labelWidget;
   final List<String> items;
 
   final AutoDisposeStateProvider<String?> selectedItem;
@@ -24,6 +25,7 @@ class CustomListDropdownField extends StatefulHookConsumerWidget {
     required this.description,
     required this.items,
     required this.selectedItem,
+    this.labelWidget,
   });
 
   @override
@@ -46,11 +48,12 @@ class _CustomListDropdownFieldState
       children: [
         Row(
           children: [
-            mediumText(
-              widget.label,
-              fontSize: 16.sp,
-              color: CustomColors.greenTextColor,
-            ),
+            widget.labelWidget ??
+                mediumText(
+                  widget.label,
+                  fontSize: 16.sp,
+                  color: CustomColors.greenTextColor,
+                ),
           ],
         ),
         verticalSpacer(12.sp),

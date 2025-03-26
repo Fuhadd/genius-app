@@ -1,7 +1,11 @@
 import 'package:genius_app/constants/route_constants.dart';
 import 'package:genius_app/home.dart';
 import 'package:genius_app/login.dart';
+import 'package:genius_app/models/screen_prop_models/activate_auto_form_model.dart';
 import 'package:genius_app/models/screen_prop_models/add_dependency_form_model.dart';
+import 'package:genius_app/models/screen_prop_models/auto_plan_details_model.dart';
+import 'package:genius_app/models/screen_prop_models/auto_plans_model.dart';
+import 'package:genius_app/models/screen_prop_models/buy_auto_plan_form_model.dart';
 import 'package:genius_app/models/screen_prop_models/dependant_added_model.dart';
 import 'package:genius_app/models/screen_prop_models/health_plans_model.dart';
 import 'package:genius_app/models/screen_prop_models/plan_summary_model.dart';
@@ -20,6 +24,17 @@ import 'package:genius_app/screens/onboarding/onboarding_page_view.dart';
 import 'package:genius_app/screens/onboarding/plain_set_password_screen.dart';
 import 'package:genius_app/screens/onboarding/plain_verify_otp_screen.dart';
 import 'package:genius_app/screens/onboarding/second_onboarding_screen.dart';
+import 'package:genius_app/screens/plans/auto_plans/activate_auto_form_screen.dart';
+import 'package:genius_app/screens/plans/auto_plans/auto_plan_details_screen.dart';
+import 'package:genius_app/screens/plans/auto_plans/auto_plans_screen.dart';
+import 'package:genius_app/screens/plans/auto_plans/auto_purchase_successful_screen.dart';
+import 'package:genius_app/screens/plans/auto_plans/buy_auto_plan_form.dart';
+import 'package:genius_app/screens/plans/auto_plans/confirm_vehicle_details_screen.dart';
+import 'package:genius_app/screens/plans/auto_plans/manage_vehicles_screen.dart';
+import 'package:genius_app/screens/plans/auto_plans/second_activate_auto_form_screen.dart';
+import 'package:genius_app/screens/plans/auto_plans/select_plans_screen.dart';
+import 'package:genius_app/screens/plans/auto_plans/vehicle_details_screen.dart';
+import 'package:genius_app/screens/plans/buy_plans_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/add_dependant_form_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/add_dependant_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/auto_renewal_screen.dart';
@@ -46,13 +61,14 @@ import 'package:genius_app/screens/plans/health_plans/upload_dependant_image_scr
 import 'package:genius_app/screens/plans/health_plans/visit_hospital_screen.dart';
 import 'package:genius_app/screens/plans/my_plans_screen.dart';
 import 'package:genius_app/stack.dart';
+import 'package:genius_app/utils/enum.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
   // initialLocation: RouteConstants.splash,
   // initialLocation: RouteConstants.dependantScreen,
   initialLocation: RouteConstants.bottomNavigationScreen,
-  // initialLocation: RouteConstants.hospitalDetailsScreen,
+  // initialLocation: RouteConstants.vehicleDetailsScreen,
   // initialLocation: RouteConstants.myPlansScreen,
 
   routes: <RouteBase>[
@@ -124,6 +140,14 @@ final GoRouter router = GoRouter(
       path: RouteConstants.bottomNavigationScreen,
       builder: (context, state) {
         return BottomNavigationScreen();
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.buyPlansScreen,
+      path: RouteConstants.buyPlansScreen,
+      builder: (context, state) {
+        return BuyPlansScreen();
       },
     ),
 
@@ -290,6 +314,16 @@ final GoRouter router = GoRouter(
         final HealthPlansModel data = state.extra as HealthPlansModel;
 
         return HealthPlansScreen(data: data);
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.autoPlansScreen,
+      path: RouteConstants.autoPlansScreen,
+      builder: (context, state) {
+        final AutoPlansModel data = state.extra as AutoPlansModel;
+
+        return AutoPlansScreen(data: data);
       },
     ),
 
@@ -479,6 +513,90 @@ final GoRouter router = GoRouter(
       path: RouteConstants.hospitalDetailsScreen,
       builder: (context, state) {
         return HospitalDetailsScreen();
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.selectAutoPlanScreen,
+      path: RouteConstants.selectAutoPlanScreen,
+      builder: (context, state) {
+        return SelectAutoPlanScreen();
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.autoPlanDetailsScreen,
+      path: RouteConstants.autoPlanDetailsScreen,
+      builder: (context, state) {
+        final AutoPlanDetailsModel data = (state.extra ??
+                AutoPlanDetailsModel(selectedPlan: AutoPlans.comprehensiveAuto))
+            as AutoPlanDetailsModel;
+        return AutoPlanDetailsScreen(data: data);
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.buyAutoPlanFormScreen,
+      path: RouteConstants.buyAutoPlanFormScreen,
+      builder: (context, state) {
+        final BuyAutoPlanFormModel data = (state.extra ??
+                BuyAutoPlanFormModel(autoPlans: AutoPlans.comprehensiveAuto))
+            as BuyAutoPlanFormModel;
+        return BuyAutoPlanFormScreen(data: data);
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.activateAutoFormScreen,
+      path: RouteConstants.activateAutoFormScreen,
+      builder: (context, state) {
+        final ActivateAutoFormModel data = (state.extra ??
+                ActivateAutoFormModel(autoPlan: AutoPlans.comprehensiveAuto))
+            as ActivateAutoFormModel;
+        return ActivateAutoFormScreen(data: data);
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.secondActivateAutoFormScreen,
+      path: RouteConstants.secondActivateAutoFormScreen,
+      builder: (context, state) {
+        final ActivateAutoFormModel data = (state.extra ??
+                ActivateAutoFormModel(autoPlan: AutoPlans.comprehensiveAuto))
+            as ActivateAutoFormModel;
+        return SecondActivateAutoFormScreen(data: data);
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.autoPurchaseSuccessfulScreen,
+      path: RouteConstants.autoPurchaseSuccessfulScreen,
+      builder: (context, state) {
+        return AutoPurchaseSuccessfulScreen();
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.manageVehiclesScreen,
+      path: RouteConstants.manageVehiclesScreen,
+      builder: (context, state) {
+        return ManageVehiclesScreen();
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.confirmVehicleDetailsScreen,
+      path: RouteConstants.confirmVehicleDetailsScreen,
+      builder: (context, state) {
+        return ConfirmVehicleDetailsScreen();
+      },
+    ),
+
+    GoRoute(
+      name: RouteConstants.vehicleDetailsScreen,
+      path: RouteConstants.vehicleDetailsScreen,
+      builder: (context, state) {
+        return VehicleDetailsScreen();
       },
     ),
   ],

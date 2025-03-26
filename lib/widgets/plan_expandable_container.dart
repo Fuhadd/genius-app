@@ -10,6 +10,8 @@ import 'package:genius_app/widgets/custom_text_widget.dart';
 class PlanExpandableContainer extends StatefulWidget {
   final String title, icon, subtitle;
   final Widget child;
+  final Widget? subtitleBody;
+  final String? secondTitle;
   final Color? titleColor;
   final double? fontSize, expandedHeight, titlePadding;
   final bool? isExpanded;
@@ -32,6 +34,8 @@ class PlanExpandableContainer extends StatefulWidget {
     this.showsubtitle = true,
     this.iconColor,
     this.titlePadding,
+    this.secondTitle,
+    this.subtitleBody,
   });
 
   @override
@@ -101,43 +105,57 @@ class _PlanExpandableContainerState extends State<PlanExpandableContainer> {
                       ),
                     ),
                     horizontalSpacer(widget.titlePadding ?? 5.w),
-                    semiBoldText(
-                      widget.title,
-                      fontSize: widget.fontSize ?? 14.sp,
-                      color: widget.titleColor ?? CustomColors.grey700Color,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        semiBoldText(
+                          widget.title,
+                          fontSize: widget.fontSize ?? 14.sp,
+                          color: widget.titleColor ?? CustomColors.grey700Color,
+                        ),
+                        if (widget.secondTitle != null)
+                          mediumText(
+                            widget.secondTitle!,
+                            fontSize: 12.sp,
+                            color: CustomColors.grey500Color,
+                          ),
+                      ],
                     ),
                     horizontalSpacer(10.w),
                     Expanded(
-                      child: !widget.showsubtitle
-                          ? SizedBox.shrink()
-                          : widget.isSubtitleCurrency
-                              ? RichText(
-                                  textAlign: TextAlign.end,
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                          text: "₦",
-                                          style: TextStyle(
-                                            fontFamily: '',
-                                            fontWeight: FontWeight.w700,
-                                            color: CustomColors.blackTextColor,
-                                            fontSize: 14.sp,
-                                          )),
-                                      TextSpan(
-                                        text: widget.subtitle,
-                                        style: CustomTextStyles.bold(
-                                          color: CustomColors.blackTextColor,
-                                          fontSize: 14.sp,
-                                        ),
+                      child: widget.subtitleBody ??
+                          (!widget.showsubtitle
+                              ? SizedBox.shrink()
+                              : widget.isSubtitleCurrency
+                                  ? RichText(
+                                      textAlign: TextAlign.end,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                              text: "₦",
+                                              style: TextStyle(
+                                                fontFamily: '',
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    CustomColors.blackTextColor,
+                                                fontSize: 14.sp,
+                                              )),
+                                          TextSpan(
+                                            text: widget.subtitle,
+                                            style: CustomTextStyles.bold(
+                                              color:
+                                                  CustomColors.blackTextColor,
+                                              fontSize: 14.sp,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                )
-                              : boldText(
-                                  widget.subtitle,
-                                  color: CustomColors.blackTextColor,
-                                  fontSize: 14.sp,
-                                ),
+                                    )
+                                  : boldText(
+                                      widget.subtitle,
+                                      color: CustomColors.blackTextColor,
+                                      fontSize: 14.sp,
+                                    )),
                     ),
                     horizontalSpacer(5.w),
                     AnimatedRotation(

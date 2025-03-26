@@ -5,12 +5,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
 import 'package:genius_app/constants/route_constants.dart';
+import 'package:genius_app/utils/enum.dart';
 import 'package:genius_app/utils/spacers.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
 import 'package:genius_app/widgets/more_actions_widget.dart';
 import 'package:go_router/go_router.dart';
 
-void showPlanActionsBottomSheet(BuildContext context) {
+void showPlanActionsBottomSheet(
+  BuildContext context, {
+  required InsuranceType insuranceType,
+}) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: true,
@@ -45,13 +49,19 @@ void showPlanActionsBottomSheet(BuildContext context) {
                         letterSpacing: 0,
                       ),
                       verticalSpacer(32.h),
-                      MoreActionsWidget(
-                        title: 'View hospital list',
-                        icon: ConstantString.newHospitalIcon,
+                      Visibility(
+                        visible: insuranceType == InsuranceType.health,
+                        child: MoreActionsWidget(
+                          title: 'View hospital list',
+                          icon: ConstantString.newHospitalIcon,
+                        ),
                       ),
-                      MoreActionsWidget(
-                        title: 'Talk to a doctor',
-                        icon: ConstantString.doctorTalkIcon,
+                      Visibility(
+                        visible: insuranceType == InsuranceType.health,
+                        child: MoreActionsWidget(
+                          title: 'Talk to a doctor',
+                          icon: ConstantString.doctorTalkIcon,
+                        ),
                       ),
                       MoreActionsWidget(
                         title: 'Plan Usage',
@@ -84,12 +94,23 @@ void showPlanActionsBottomSheet(BuildContext context) {
                         },
                       ),
                       MoreActionsWidget(
-                        title: 'Manage dependant (s)',
+                        title:
+                            'Manage ${insuranceType == InsuranceType.health ? 'dependant' : 'Vehicle'} (s)',
                         icon: ConstantString.manageDependentIcon,
                         onTap: () {
                           context.pop();
                           context.pushNamed(
                             RouteConstants.managePoliciesScreen,
+                          );
+                        },
+                      ),
+                      MoreActionsWidget(
+                        title: 'Make claim',
+                        icon: ConstantString.smallMakeClaimIcon,
+                        onTap: () {
+                          context.pop();
+                          context.pushNamed(
+                            RouteConstants.planHistoryScreen,
                           );
                         },
                       ),

@@ -135,7 +135,10 @@ class _HealthPlansScreenState extends State<HealthPlansScreen>
                   horizontalSpacer(8.w),
                   GestureDetector(
                     onTap: () {
-                      showPlanActionsBottomSheet(context);
+                      showPlanActionsBottomSheet(
+                        context,
+                        insuranceType: InsuranceType.health,
+                      );
                     },
                     child: Container(
                       height: 32.h,
@@ -503,7 +506,8 @@ class _HealthPlansScreenState extends State<HealthPlansScreen>
                                 title: 'Reactivate Plan',
                                 onTap: () {
                                   showPlanAdjustmentBottomSheet(context,
-                                      isReActivate: true);
+                                      planAdjustmentType:
+                                          PlanAdjustmentType.reActivate);
                                 },
                               ),
                             )

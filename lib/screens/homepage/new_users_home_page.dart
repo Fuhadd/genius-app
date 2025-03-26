@@ -5,11 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
+import 'package:genius_app/constants/route_constants.dart';
+import 'package:genius_app/models/screen_prop_models/auto_plan_details_model.dart';
 import 'package:genius_app/screens/homepage/widgets/other_product_container.dart';
 import 'package:genius_app/screens/homepage/widgets/plans_container.dart';
 import 'package:genius_app/utils/custom_text_styles.dart';
+import 'package:genius_app/utils/enum.dart';
 import 'package:genius_app/utils/spacers.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class NewUsersHomePage extends StatelessWidget {
   const NewUsersHomePage({
@@ -198,6 +202,14 @@ class NewUsersHomePage extends StatelessWidget {
                           minPrice: "5%",
                           period: "/vehicle value",
                           bgColor: CustomColors.orange100Color,
+                          onTap: () {
+                            context.pushNamed(
+                              RouteConstants.autoPlanDetailsScreen,
+                              extra: AutoPlanDetailsModel(
+                                selectedPlan: AutoPlans.comprehensiveAuto,
+                              ),
+                            );
+                          },
                         ),
                         PlansContainer(
                           title: 'Mini Comprehensive',
@@ -208,6 +220,14 @@ class NewUsersHomePage extends StatelessWidget {
                           isCurrency: true,
                           period: "/annually",
                           bgColor: CustomColors.pink100Color,
+                          onTap: () {
+                            context.pushNamed(
+                              RouteConstants.autoPlanDetailsScreen,
+                              extra: AutoPlanDetailsModel(
+                                selectedPlan: AutoPlans.miniComprehensive,
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),

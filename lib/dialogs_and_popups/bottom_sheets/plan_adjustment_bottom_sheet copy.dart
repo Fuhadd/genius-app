@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
 import 'package:genius_app/constants/route_constants.dart';
 import 'package:genius_app/dialogs_and_popups/bottom_sheets/deactivate_health_plan_bottom_sheet.dart';
-import 'package:genius_app/dialogs_and_popups/bottom_sheets/dependant_removed_bottom_sheet.dart';
 import 'package:genius_app/models/screen_prop_models/plan_summary_model.dart';
 import 'package:genius_app/utils/custom_text_styles.dart';
 import 'package:genius_app/utils/enum.dart';
 import 'package:genius_app/utils/spacers.dart';
-import 'package:genius_app/utils/string_utils.dart';
 import 'package:genius_app/widgets/custom_button.dart';
-import 'package:genius_app/widgets/custom_text_field.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
-import 'package:genius_app/widgets/grid_options_container.dart';
-import 'package:genius_app/widgets/grid_radio_chip_container.dart';
 import 'package:go_router/go_router.dart';
 
+enum PlanAdjustmentType {
+  reActivate,
+  renew,
+}
+
 void showPlanAdjustmentBottomSheet(BuildContext context,
-    {bool isReActivate = false}) {
+    {PlanAdjustmentType? planAdjustmentType}) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: true,
@@ -33,8 +32,6 @@ void showPlanAdjustmentBottomSheet(BuildContext context,
       barrierColor: Colors.black.withOpacity(0.6),
       context: context,
       builder: (context) {
-        bool obscurePassword = true;
-        String password = "";
         return StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
           return LayoutBuilder(builder: (context, constraints) {
@@ -55,16 +52,21 @@ void showPlanAdjustmentBottomSheet(BuildContext context,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(
-                              isReActivate
+                              planAdjustmentType ==
+                                      PlanAdjustmentType.reActivate
                                   ? ConstantString.powerIcon
                                   : ConstantString.planAdjustIcon,
                               height: 24.h,
                             ),
                             horizontalSpacer(10.w),
                             boldText(
-                              isReActivate
+                              planAdjustmentType ==
+                                      PlanAdjustmentType.reActivate
                                   ? 'Reactivate Plan'
-                                  : 'Plan Adjustment',
+                                  : planAdjustmentType ==
+                                          PlanAdjustmentType.renew
+                                      ? 'Renew Plan'
+                                      : 'Plan Adjustment',
                               fontSize: 20.sp,
                               color: CustomColors.green400Color,
                               textAlign: TextAlign.center,
@@ -73,7 +75,7 @@ void showPlanAdjustmentBottomSheet(BuildContext context,
                         ),
                         verticalSpacer(32.h),
 
-                        isReActivate
+                        planAdjustmentType == PlanAdjustmentType.reActivate
                             ? Padding(
                                 padding: EdgeInsets.only(bottom: 20.h),
                                 child: semiBoldText(
@@ -81,9 +83,17 @@ void showPlanAdjustmentBottomSheet(BuildContext context,
                                     fontSize: 14.sp,
                                     color: CustomColors.blackTextColor),
                               )
-                            : SizedBox.shrink(),
+                            : planAdjustmentType == PlanAdjustmentType.renew
+                                ? Padding(
+                                    padding: EdgeInsets.only(bottom: 20.h),
+                                    child: semiBoldText(
+                                        'Here are a few things to consider before renewing this plan:',
+                                        fontSize: 14.sp,
+                                        color: CustomColors.blackTextColor),
+                                  )
+                                : SizedBox.shrink(),
 
-                        isReActivate
+                        planAdjustmentType == PlanAdjustmentType.reActivate
                             ? DetailsRow(
                                 title: "",
                                 titleBody: RichText(
@@ -117,41 +127,80 @@ void showPlanAdjustmentBottomSheet(BuildContext context,
                                   ),
                                 ),
                               )
-                            : DetailsRow(
-                                title: "",
-                                titleBody: RichText(
-                                  // textAlign: TextAlign.center,
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: "Moving from FlexiCare to ",
-                                        style: CustomTextStyles.medium(
-                                          fontSize: 14.sp,
-                                          color: CustomColors.blackTextColor,
-                                        ),
+                            : planAdjustmentType == PlanAdjustmentType.renew
+                                ? DetailsRow(
+                                    title: "",
+                                    titleBody: RichText(
+                                      // textAlign: TextAlign.center,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text:
+                                                "Renewing this plan gives you ",
+                                            style: CustomTextStyles.medium(
+                                              fontSize: 14.sp,
+                                              color:
+                                                  CustomColors.blackTextColor,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: "full ownership, ",
+                                            style: CustomTextStyles.semiBold(
+                                              fontSize: 14.sp,
+                                              color:
+                                                  CustomColors.blackTextColor,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text:
+                                                "meaning you'll be responsible for subsequent renewals.",
+                                            style: CustomTextStyles.medium(
+                                              fontSize: 14.sp,
+                                              color:
+                                                  CustomColors.blackTextColor,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      TextSpan(
-                                        text: "FlexiCare Mini ",
-                                        style: CustomTextStyles.medium(
-                                          fontSize: 14.sp,
-                                          color: CustomColors.green500Color,
-                                        ),
+                                    ),
+                                  )
+                                : DetailsRow(
+                                    title: "",
+                                    titleBody: RichText(
+                                      // textAlign: TextAlign.center,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: "Moving from FlexiCare to ",
+                                            style: CustomTextStyles.medium(
+                                              fontSize: 14.sp,
+                                              color:
+                                                  CustomColors.blackTextColor,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: "FlexiCare Mini ",
+                                            style: CustomTextStyles.medium(
+                                              fontSize: 14.sp,
+                                              color: CustomColors.green500Color,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text:
+                                                "adjusts your premium and benefits",
+                                            style: CustomTextStyles.medium(
+                                              fontSize: 14.sp,
+                                              color:
+                                                  CustomColors.blackTextColor,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      TextSpan(
-                                        text:
-                                            "adjusts your premium and benefits",
-                                        style: CustomTextStyles.medium(
-                                          fontSize: 14.sp,
-                                          color: CustomColors.blackTextColor,
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
                         verticalSpacer(20.h),
 
-                        isReActivate
+                        planAdjustmentType == PlanAdjustmentType.reActivate
                             ? DetailsRow(
                                 title: "",
                                 titleBody: RichText(
@@ -221,8 +270,13 @@ void showPlanAdjustmentBottomSheet(BuildContext context,
                           children: [
                             Expanded(
                               child: CustomButton(
-                                title:
-                                    isReActivate ? 'Reactivate' : 'Yes, Change',
+                                title: planAdjustmentType ==
+                                        PlanAdjustmentType.reActivate
+                                    ? 'Reactivate'
+                                    : planAdjustmentType ==
+                                            PlanAdjustmentType.renew
+                                        ? 'Renew'
+                                        : 'Yes, Change',
                                 onTap: () {
                                   context.pop();
                                   context.pushNamed(

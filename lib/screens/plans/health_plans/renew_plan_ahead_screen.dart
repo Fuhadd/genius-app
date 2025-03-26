@@ -6,6 +6,7 @@ import 'package:genius_app/constants/custom_string.dart';
 import 'package:genius_app/dialogs_and_popups/bottom_sheets/make_payment_bottom_sheet.dart';
 import 'package:genius_app/screens/plans/health_plans/dependant_screen.dart';
 import 'package:genius_app/utils/custom_text_styles.dart';
+import 'package:genius_app/utils/enum.dart';
 import 'package:genius_app/utils/spacers.dart';
 import 'package:genius_app/widgets/custom_button.dart';
 import 'package:genius_app/widgets/custom_text_field.dart';
@@ -266,7 +267,7 @@ class _RenewPlanAheadScreenState extends ConsumerState<RenewPlanAheadScreen> {
                             title: 'Proceed to Payment',
                             onTap: () {
                               showMakePaymentBottomSheet(context,
-                                  isRenewal: true);
+                                  option: MakePaymentOptions.renewal);
                             }),
                         Spacer(),
                         verticalSpacer(

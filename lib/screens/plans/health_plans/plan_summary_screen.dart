@@ -99,7 +99,9 @@ class _PlanSummaryScreenState extends ConsumerState<PlanSummaryScreen> {
                                 widget.data.planSummaryType ==
                                             PlanSummaryType.changeCoverPeriod ||
                                         widget.data.planSummaryType ==
-                                            PlanSummaryType.planAdjustment
+                                            PlanSummaryType.planAdjustment ||
+                                        widget.data.planSummaryType ==
+                                            PlanSummaryType.autoPlanSummary
                                     ? ConstantString.editCoverPeriodIcon
                                     : ConstantString.scanUserIcon,
                               ),
@@ -111,7 +113,11 @@ class _PlanSummaryScreenState extends ConsumerState<PlanSummaryScreen> {
                                     PlanSummaryType.planAdjustment
                                 ? 'Current Plan'
                                 : 'Plan',
-                            subtitle: 'FlexiCare',
+                            subtitle: widget.data.planSummaryType ==
+                                    PlanSummaryType.autoPlanSummary
+                                ? widget.data.selectedAutoPlan?.description ??
+                                    'Comprehensive Auto'
+                                : 'FlexiCare',
                           ),
                           widget.data.planSummaryType ==
                                   PlanSummaryType.planAdjustment
@@ -125,7 +131,12 @@ class _PlanSummaryScreenState extends ConsumerState<PlanSummaryScreen> {
                               : SizedBox.shrink(),
                           DependantDetailsContainer(
                             title: 'Cover Period',
-                            subtitle: 'Monthly',
+                            subtitle: (widget.data.selectedAutoPlan ==
+                                        AutoPlans.miniComprehensive ||
+                                    widget.data.selectedAutoPlan ==
+                                        AutoPlans.thirdParty)
+                                ? 'Annual'
+                                : 'Monthly',
                           ),
                           widget.data.planSummaryType ==
                                   PlanSummaryType.planAdjustment
@@ -133,38 +144,84 @@ class _PlanSummaryScreenState extends ConsumerState<PlanSummaryScreen> {
                                   title: 'Purchase Date',
                                   subtitle: '12th May, 2025',
                                 )
-                              : SizedBox.shrink(),
+                              : widget.data.planSummaryType ==
+                                      PlanSummaryType.autoPlanSummary
+                                  ? DependantDetailsContainer(
+                                      title: 'Vehicle owner(s)',
+                                      subtitle: '1',
+                                    )
+                                  : SizedBox.shrink(),
                           widget.data.planSummaryType ==
                                   PlanSummaryType.planAdjustment
                               ? DependantDetailsContainer(
                                   title: 'Renewal Date',
                                   subtitle: '12th May, 2025',
                                 )
-                              : SizedBox.shrink(),
+                              : widget.data.planSummaryType ==
+                                      PlanSummaryType.autoPlanSummary
+                                  ? DependantDetailsContainer(
+                                      title: 'Vehicle Value',
+                                      subtitle: '1',
+                                      subtitleBody: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                                text: "₦",
+                                                style: TextStyle(
+                                                  fontFamily: '',
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 14.sp,
+                                                  color: CustomColors
+                                                      .orange900Color,
+                                                )),
+                                            TextSpan(
+                                              text: "100,000,000",
+                                              style: CustomTextStyles.semiBold(
+                                                fontSize: 14.sp,
+                                                color:
+                                                    CustomColors.orange900Color,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox.shrink(),
                           widget.data.planSummaryType ==
                                   PlanSummaryType.planAdjustment
                               ? SizedBox.shrink()
+                              : widget.data.planSummaryType ==
+                                      PlanSummaryType.autoPlanSummary
+                                  ? DependantDetailsContainer(
+                                      title: 'Vehicle(s) Covered',
+                                      subtitle: '2',
+                                    )
+                                  : DependantDetailsContainer(
+                                      title: 'Type',
+                                      subtitle: widget.data.planSummaryType ==
+                                              PlanSummaryType.changeCoverPeriod
+                                          ? 'Myself and Others'
+                                          : 'Others',
+                                    ),
+                          widget.data.planSummaryType ==
+                                  PlanSummaryType.autoPlanSummary
+                              ? SizedBox.shrink()
                               : DependantDetailsContainer(
-                                  title: 'Type',
-                                  subtitle: widget.data.planSummaryType ==
+                                  title: widget.data.planSummaryType ==
                                           PlanSummaryType.changeCoverPeriod
-                                      ? 'Myself and Others'
-                                      : 'Others',
+                                      ? widget.data.planSummaryType ==
+                                              PlanSummaryType.planAdjustment
+                                          ? 'Persons Covered'
+                                          : 'Policies'
+                                      : 'New dependant(s)',
+                                  subtitle: '5',
                                 ),
-                          DependantDetailsContainer(
-                            title: widget.data.planSummaryType ==
-                                    PlanSummaryType.changeCoverPeriod
-                                ? widget.data.planSummaryType ==
-                                        PlanSummaryType.planAdjustment
-                                    ? 'Persons Covered'
-                                    : 'Policies'
-                                : 'New dependant(s)',
-                            subtitle: '5',
-                          ),
                           widget.data.planSummaryType ==
                                       PlanSummaryType.changeCoverPeriod ||
                                   widget.data.planSummaryType ==
-                                      PlanSummaryType.planAdjustment
+                                      PlanSummaryType.planAdjustment ||
+                                  widget.data.planSummaryType ==
+                                      PlanSummaryType.autoPlanSummary
                               ? SizedBox.shrink()
                               : DependantDetailsContainer(
                                   title: 'Updated dependant(s)',
@@ -228,14 +285,22 @@ class _PlanSummaryScreenState extends ConsumerState<PlanSummaryScreen> {
                           ? 'Confirm'
                           : 'Proceed to Payment',
                       onTap: widget.data.planSummaryType ==
-                              PlanSummaryType.planAdjustment
+                              PlanSummaryType.autoPlanSummary
                           ? () {
-                              showCoverPeriodChangedBottomSheet(context,
-                                  isAdjustPlan: true);
+                              showMakePaymentBottomSheet(
+                                context,
+                                option: MakePaymentOptions.autoPurchase,
+                              );
                             }
-                          : () {
-                              showCoverPeriodChangedBottomSheet(context);
-                            }),
+                          : widget.data.planSummaryType ==
+                                  PlanSummaryType.planAdjustment
+                              ? () {
+                                  showCoverPeriodChangedBottomSheet(context,
+                                      isAdjustPlan: true);
+                                }
+                              : () {
+                                  showCoverPeriodChangedBottomSheet(context);
+                                }),
                   Spacer(),
                   verticalSpacer(MediaQuery.of(context).padding.bottom + 20),
                 ],

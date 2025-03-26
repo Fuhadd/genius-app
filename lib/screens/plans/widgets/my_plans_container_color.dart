@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
 import 'package:genius_app/constants/route_constants.dart';
+import 'package:genius_app/models/screen_prop_models/auto_plans_model.dart';
 import 'package:genius_app/models/screen_prop_models/health_plans_model.dart';
 import 'package:genius_app/utils/custom_text_styles.dart';
 import 'package:genius_app/utils/enum.dart';
@@ -35,12 +36,21 @@ class MyPlansContainerColor extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(
-          RouteConstants.healthPlansScreen,
-          extra: HealthPlansModel(
-            isExpired: isExpired,
-          ),
-        );
+        if (insuranceType == InsuranceType.vehicle) {
+          context.pushNamed(
+            RouteConstants.autoPlansScreen,
+            extra: AutoPlansModel(
+              isExpired: isExpired,
+            ),
+          );
+        } else {
+          context.pushNamed(
+            RouteConstants.healthPlansScreen,
+            extra: HealthPlansModel(
+              isExpired: isExpired,
+            ),
+          );
+        }
       },
       child: Container(
         // height: 64.h,

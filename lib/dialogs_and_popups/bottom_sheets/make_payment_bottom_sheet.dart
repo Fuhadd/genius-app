@@ -15,10 +15,10 @@ import 'package:genius_app/widgets/grid_options_container.dart';
 import 'package:genius_app/widgets/grid_radio_chip_container.dart';
 import 'package:go_router/go_router.dart';
 
-void showMakePaymentBottomSheet(
-  BuildContext context, {
-  bool isRenewal = false,
-}) {
+void showMakePaymentBottomSheet(BuildContext context,
+    {
+    // bool isRenewal = false,
+    MakePaymentOptions? option}) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: true,
@@ -131,10 +131,16 @@ void showMakePaymentBottomSheet(
                         CustomButton(
                           title: 'Continue',
                           onTap: () {
-                            if (isRenewal) {
+                            if (option == MakePaymentOptions.renewal) {
                               context.pop();
                               context.pushReplacementNamed(
                                 RouteConstants.renewalSuccessfulScreen,
+                              );
+                            } else if (option ==
+                                MakePaymentOptions.autoPurchase) {
+                              context.pop();
+                              context.pushReplacementNamed(
+                                RouteConstants.autoPurchaseSuccessfulScreen,
                               );
                             } else {
                               context.pop();

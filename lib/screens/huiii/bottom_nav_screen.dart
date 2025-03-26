@@ -165,7 +165,7 @@ class _BottomNavigationScreenState extends ConsumerState<BottomNavigationScreen>
                               // index == 0
                               //     ?
                               const EdgeInsets.symmetric(
-                            horizontal: 8.0,
+                            horizontal: 5.0,
                             vertical: 10,
                           ),
                           // : EdgeInsets.zero,

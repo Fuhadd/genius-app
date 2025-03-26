@@ -637,6 +637,7 @@ class _DependantScreenState extends State<DependantScreen>
                       ),
                     ),
                     // Content for the WhatsApp tab.
+
                     SingleChildScrollView(
                       child: Column(
                         children: [

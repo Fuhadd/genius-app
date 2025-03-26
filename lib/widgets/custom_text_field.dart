@@ -149,6 +149,7 @@ Widget customTextFieldWithText(String name, String labelText,
     IconData? suffixIcon,
     String? initialValue,
     bool isHint = false,
+    bool isCurrency = false,
     bool obscureText = false,
     bool showTitle = true,
     String? helperText,
@@ -193,6 +194,7 @@ Widget customTextFieldWithText(String name, String labelText,
           helperText: helperText,
           onSuffixTap: onSuffixTap,
           suffix: suffix,
+          isCurrency: isCurrency,
         ),
       ),
     ],
@@ -207,6 +209,7 @@ InputDecoration customFormDecorationWithText(
   String? helperText,
   Widget? prefix,
   bool isHint = false,
+  bool isCurrency = false,
   void Function()? onSuffixTap,
   Widget? suffix,
 }) {
@@ -262,13 +265,26 @@ InputDecoration customFormDecorationWithText(
       ),
     ),
 
-    prefixIcon: prefixIcon == null
-        ? null
-        : Icon(
-            prefixIcon,
-            size: 16,
-            color: CustomColors.blackColor.withOpacity(0.6),
-          ),
+    prefixIcon: isCurrency
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("₦",
+                  style: TextStyle(
+                    fontFamily: '',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.sp,
+                    color: CustomColors.grey600Color,
+                  )),
+            ],
+          )
+        : prefixIcon == null
+            ? null
+            : Icon(
+                prefixIcon,
+                size: 16,
+                color: CustomColors.blackColor.withOpacity(0.6),
+              ),
     // prefixIconColor: Colors.red,
     // suffixIcon: GestureDetector(
     //   onTap: onSuffixTap,

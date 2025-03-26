@@ -5,12 +5,14 @@ import 'package:genius_app/constants/custom_string.dart';
 import 'package:genius_app/dialogs_and_popups/bottom_sheets/dependant_removed_bottom_sheet.dart';
 import 'package:genius_app/dialogs_and_popups/bottom_sheets/edit_dependant_bottom_sheet.dart';
 import 'package:genius_app/dialogs_and_popups/bottom_sheets/remove_dependant_bottom_sheet.dart';
+import 'package:genius_app/utils/enum.dart';
 import 'package:genius_app/utils/spacers.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
 import 'package:genius_app/widgets/more_actions_widget.dart';
 import 'package:go_router/go_router.dart';
 
-void showDependantActionsBottomSheet(BuildContext context) {
+void showDependantActionsBottomSheet(BuildContext context,
+    {InsuranceType? insuranceType}) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: true,
@@ -46,20 +48,37 @@ void showDependantActionsBottomSheet(BuildContext context) {
                       ),
                       verticalSpacer(32.h),
                       MoreActionsWidget(
-                        title: 'Edit policy',
+                        title: insuranceType == InsuranceType.vehicle
+                            ? 'Edit vehicle details'
+                            : 'Edit policy',
                         icon: ConstantString.editPlanIcon,
                         onTap: () {
                           context.pop();
-                          showEditDependantBottomSheet(context);
+                          showEditDependantBottomSheet(context,
+                              insuranceType: InsuranceType.vehicle);
                         },
                       ),
+                      Visibility(
+                        visible: insuranceType == InsuranceType.vehicle,
+                        child: MoreActionsWidget(
+                          title: 'Make claim',
+                          icon: ConstantString.smallMakeClaimIcon,
+                          onTap: () {
+                            context.pop();
+                            // showEditDependantBottomSheet(context);
+                          },
+                        ),
+                      ),
                       MoreActionsWidget(
-                        title: 'Remove policy',
+                        title: insuranceType == InsuranceType.vehicle
+                            ? 'Remove vehicle'
+                            : 'Remove policy',
                         icon: ConstantString.removePolicyIcon,
                         textColor: CustomColors.red500Color,
                         onTap: () {
                           context.pop();
-                          showRemoveDependantBottomSheet(context);
+                          showRemoveDependantBottomSheet(context,
+                              insuranceType: InsuranceType.vehicle);
                         },
                       ),
                       verticalSpacer(

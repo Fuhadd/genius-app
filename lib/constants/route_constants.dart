@@ -54,4 +54,21 @@ class RouteConstants {
   static const String comparePlansTableScreen = '/comparePlansTableScreen';
   static const String visitHospitalScreen = '/visitHospitalScreen';
   static const String hospitalDetailsScreen = '/hospitalDetailsScreen';
+  static const String buyPlansScreen = '/buyPlansScreen';
+  static const String selectAutoPlanScreen = '/selectAutoPlanScreen';
+  static const String autoPlanDetailsScreen = '/autoPlanDetailsScreen';
+  static const String buyAutoPlanFormScreen = '/buyAutoPlanFormScreen';
+  static const String manageVehiclesScreen = '/manageVehiclesScreen';
+  static const String activateAutoFormScreen = '/activateAutoFormScreen';
+  static const String autoPlansScreen = '/autoPlansScreen';
+  static const String vehicleDetailsScreen = '/vehicleDetailsScreen';
+
+  static const String secondActivateAutoFormScreen =
+      '/secondActivateAutoFormScreen';
+
+  static const String confirmVehicleDetailsScreen =
+      '/confirmVehicleDetailsScreen';
+
+  static const String autoPurchaseSuccessfulScreen =
+      '/autoPurchaseSuccessfulScreen';
 }

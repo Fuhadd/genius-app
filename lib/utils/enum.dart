@@ -16,7 +16,7 @@ enum Gender {
   female,
 }
 
-enum PolicyUser { owner, major, minor }
+enum PolicyUser { owner, major, minor, others }
 
 enum WorkStatus {
   businessStaff,
@@ -31,6 +31,8 @@ enum VerificationMode {
   whatsapp,
 }
 
+enum VehicleDetailsTab { vehicle, owner, claims, inspection }
+
 enum HospitalCategory {
   all,
   hospital,
@@ -39,10 +41,7 @@ enum HospitalCategory {
   pharmacy,
 }
 
-enum PlanSummaryType {
-  changeCoverPeriod,
-  planAdjustment,
-}
+enum PlanSummaryType { changeCoverPeriod, planAdjustment, autoPlanSummary }
 
 enum HealthPlans {
   flexicare,
@@ -51,6 +50,30 @@ enum HealthPlans {
   zencarePlus,
   primecare,
   primecarePlus,
+}
+
+enum AutoPlans {
+  comprehensiveAuto,
+  miniComprehensive,
+  thirdParty,
+}
+
+extension AutoPlansName on AutoPlans {
+  String get description {
+    switch (this) {
+      case AutoPlans.comprehensiveAuto:
+        return 'Comprehensive Auto';
+      case AutoPlans.miniComprehensive:
+        return 'Mini Comprehensive';
+      case AutoPlans.thirdParty:
+        return 'Third Party';
+    }
+  }
+}
+
+enum MakePaymentOptions {
+  renewal,
+  autoPurchase,
 }
 
 enum LoginMode {

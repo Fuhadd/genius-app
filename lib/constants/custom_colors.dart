@@ -20,6 +20,8 @@ class CustomColors {
   static const green400Color = Color(0xFF1A473F);
 
   static const grey25Color = Color(0xFFFCFCFD);
+  static const grey75Color = Color(0xFFF9FAFB);
+
   static const grey50Color = Color(0xFFF1F2F4);
   static const grey100Color = Color(0xFFE2E4E9);
   static const gray200Color = Color(0xFFC5CAD3);
@@ -40,6 +42,7 @@ class CustomColors {
   static const orange500Color = Color(0xFFFE5E02);
   static const orange900Color = Color(0xFF331300);
   static const orange950Color = Color(0xFF190900);
+  static const orangeTextColor = Color(0xFF331900);
 
   static const yellow500Color = Color(0xFFFFEB3B);
   static const deepYellowColor = Color(0xFFFCE681);

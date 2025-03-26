@@ -4,11 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
 import 'package:genius_app/utils/custom_text_styles.dart';
+import 'package:genius_app/utils/enum.dart';
 import 'package:genius_app/utils/spacers.dart';
 import 'package:genius_app/widgets/custom_button.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
 
-void showEditDependantBottomSheet(BuildContext context) {
+void showEditDependantBottomSheet(BuildContext context,
+    {InsuranceType? insuranceType}) {
   showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: true,
@@ -43,7 +45,9 @@ void showEditDependantBottomSheet(BuildContext context) {
                           ),
                           horizontalSpacer(10.w),
                           boldText(
-                            'Edit Dependant',
+                            insuranceType == InsuranceType.vehicle
+                                ? 'Edit Vehicle'
+                                : 'Edit Dependant',
                             fontSize: 20.sp,
                             color: CustomColors.green400Color,
                             textAlign: TextAlign.center,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:genius_app/constants/route_constants.dart';
+import 'package:genius_app/models/screen_prop_models/health_plans_model.dart';
 import 'package:genius_app/screens/huiii/nav_bar.dart';
 import 'package:genius_app/screens/huiii/nav_model.dart';
+import 'package:go_router/go_router.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -73,7 +76,14 @@ class _MainScreenState extends State<MainScreen> {
           child: FloatingActionButton(
             backgroundColor: Colors.white,
             elevation: 0,
-            onPressed: () => debugPrint("Add Button pressed"),
+            onPressed: () {
+              // context.pushNamed(
+              //   RouteConstants.selectPlanScreen,
+              //   extra: HealthPlansModel(
+              //     isExpired: false,
+              //   ),
+              // );
+            },
             shape: RoundedRectangleBorder(
               side: const BorderSide(width: 3, color: Colors.green),
               borderRadius: BorderRadius.circular(100),

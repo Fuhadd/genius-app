@@ -5,11 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:genius_app/constants/custom_colors.dart';
 import 'package:genius_app/constants/custom_string.dart';
+import 'package:genius_app/constants/route_constants.dart';
 import 'package:genius_app/screens/homepage/widgets/other_product_container.dart';
 import 'package:genius_app/screens/homepage/widgets/plans_count_container.dart';
 import 'package:genius_app/utils/custom_text_styles.dart';
 import 'package:genius_app/utils/spacers.dart';
 import 'package:genius_app/widgets/custom_text_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class ActiveUsersHomePage extends StatelessWidget {
   const ActiveUsersHomePage({
@@ -255,6 +257,11 @@ class ActiveUsersHomePage extends StatelessWidget {
                         CircularOptionsContainer(
                           icon: ConstantString.buyPlanIcon,
                           title: 'Buy Plan',
+                          onTap: () {
+                            context.pushNamed(
+                              RouteConstants.buyPlansScreen,
+                            );
+                          },
                         ),
                         horizontalSpacer(16.w),
                         CircularOptionsContainer(
@@ -710,10 +717,12 @@ class KeyActionContainer extends StatelessWidget {
 
 class CircularOptionsContainer extends StatelessWidget {
   final String icon, title;
+  final void Function()? onTap;
   const CircularOptionsContainer({
     super.key,
     required this.icon,
     required this.title,
+    this.onTap,
   });
 
   @override
@@ -721,17 +730,20 @@ class CircularOptionsContainer extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          Container(
-            // height: 78.h,
-            decoration: BoxDecoration(
-              color: CustomColors.whiteColor,
-              shape: BoxShape.circle,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(22.0),
-              child: Center(
-                child: SvgPicture.asset(
-                  icon,
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              // height: 78.h,
+              decoration: BoxDecoration(
+                color: CustomColors.whiteColor,
+                shape: BoxShape.circle,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(22.0),
+                child: Center(
+                  child: SvgPicture.asset(
+                    icon,
+                  ),
                 ),
               ),
             ),
