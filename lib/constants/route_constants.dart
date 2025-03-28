@@ -63,4 +63,5 @@ class RouteConstants {
   static const String activatePlanScreen = '/activatePlanScreen';
   static const String activatePlanConfirmPolicyScreen =
       '/activatePlanConfirmPolicyScreen';
+  static const String selectTravelPlanScreen = 'selectTravelPlanScreen';
 }

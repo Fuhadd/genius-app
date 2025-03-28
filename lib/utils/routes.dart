@@ -53,6 +53,7 @@ import 'package:genius_app/screens/plans/health_plans/send_activation_email_scre
 import 'package:genius_app/screens/plans/health_plans/upload_dependant_image_screen.dart';
 import 'package:genius_app/screens/plans/health_plans/visit_hospital_screen.dart';
 import 'package:genius_app/screens/plans/my_plans_screen.dart';
+import 'package:genius_app/screens/plans/travel_plans/buy_plan/select_plan_screen.dart';
 import 'package:genius_app/stack.dart';
 import 'package:go_router/go_router.dart';
 
@@ -551,6 +552,14 @@ final GoRouter router = GoRouter(
             state.extra as SendActivationEmailModel;
 
         return ActivatePlanConfirmPolicyScreen(data: data);
+      },
+    ),
+     GoRoute(
+      name: RouteConstants.selectTravelPlanScreen,
+      path: RouteConstants.selectTravelPlanScreen,
+      builder: (context, state) {
+
+        return SelectTravelPlanScreen();
       },
     ),
   ],
